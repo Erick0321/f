@@ -9,6 +9,7 @@ void mostrarTabla(float notas[ESTUDIANTES][ASIGNATURAS]);
 void calcularPromedioEstudiante(float notas[ESTUDIANTES][ASIGNATURAS]);
 void calcularPromedioAsignatura(float notas[ESTUDIANTES][ASIGNATURAS]);
 void calcularMaxMin(float notas[ESTUDIANTES][ASIGNATURAS]);
+void calcularAprobados(float notas[ESTUDIANTES][ASIGNATURAS]);
 
 int main() {
     float notas[ESTUDIANTES][ASIGNATURAS];
@@ -20,6 +21,7 @@ int main() {
     calcularPromedioEstudiante(notas);
     calcularPromedioAsignatura(notas);
     calcularMaxMin(notas);
+    calcularAprobados(notas);
 
     return 0;
 }
@@ -83,8 +85,6 @@ void calcularMaxMin(float notas[ESTUDIANTES][ASIGNATURAS]) {
     int i, j;
     float maxEst, minEst, maxAsig, minAsig;
 
-    printf("\nMaximos y minimos:\n");
-
     for (i = 0; i < ESTUDIANTES; i++) {
         maxEst = minEst = notas[i][0];
         for (j = 1; j < ASIGNATURAS; j++) {
@@ -101,5 +101,24 @@ void calcularMaxMin(float notas[ESTUDIANTES][ASIGNATURAS]) {
             if (notas[i][j] < minAsig) minAsig = notas[i][j];
         }
         printf("Asignatura %d -> Max: %.1f Min: %.1f\n", j + 1, maxAsig, minAsig);
+    }
+}
+
+void calcularAprobados(float notas[ESTUDIANTES][ASIGNATURAS]) {
+    int i, j, aprobados, reprobados;
+
+    for (j = 0; j < ASIGNATURAS; j++) {
+        aprobados = 0;
+        reprobados = 0;
+
+        for (i = 0; i < ESTUDIANTES; i++) {
+            if (notas[i][j] >= NOTA_APROBATORIA)
+                aprobados++;
+            else
+                reprobados++;
+        }
+
+        printf("Asignatura %d -> Aprobados: %d Reprobados: %d\n",
+               j + 1, aprobados, reprobados);
     }
 }
