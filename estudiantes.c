@@ -5,6 +5,8 @@
 #define NOTA_APROBATORIA 6.0
 
 void ingresarCalificaciones(float notas[ESTUDIANTES][ASIGNATURAS]);
+void mostrarTabla(float notas[ESTUDIANTES][ASIGNATURAS]);
+void calcularPromedioEstudiante(float notas[ESTUDIANTES][ASIGNATURAS]);
 
 int main() {
     float notas[ESTUDIANTES][ASIGNATURAS];
@@ -13,9 +15,11 @@ int main() {
 
     ingresarCalificaciones(notas);
     mostrarTabla(notas);
+    calcularPromedioEstudiante(notas);
 
     return 0;
 }
+
 void ingresarCalificaciones(float notas[ESTUDIANTES][ASIGNATURAS]) {
     int i, j;
     float nota;
@@ -42,5 +46,19 @@ void mostrarTabla(float notas[ESTUDIANTES][ASIGNATURAS]) {
             printf("%.1f ", notas[i][j]);
         }
         printf("\n");
+    }
+}
+
+void calcularPromedioEstudiante(float notas[ESTUDIANTES][ASIGNATURAS]) {
+    int i, j;
+    float suma, promedio;
+
+    for (i = 0; i < ESTUDIANTES; i++) {
+        suma = 0;
+        for (j = 0; j < ASIGNATURAS; j++) {
+            suma += notas[i][j];
+        }
+        promedio = suma / ASIGNATURAS;
+        printf("Estudiante %d: %.2f\n", i + 1, promedio);
     }
 }
