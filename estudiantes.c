@@ -7,6 +7,7 @@
 void ingresarCalificaciones(float notas[ESTUDIANTES][ASIGNATURAS]);
 void mostrarTabla(float notas[ESTUDIANTES][ASIGNATURAS]);
 void calcularPromedioEstudiante(float notas[ESTUDIANTES][ASIGNATURAS]);
+void calcularPromedioAsignatura(float notas[ESTUDIANTES][ASIGNATURAS]);
 
 int main() {
     float notas[ESTUDIANTES][ASIGNATURAS];
@@ -16,6 +17,7 @@ int main() {
     ingresarCalificaciones(notas);
     mostrarTabla(notas);
     calcularPromedioEstudiante(notas);
+    calcularPromedioAsignatura(notas);
 
     return 0;
 }
@@ -60,5 +62,19 @@ void calcularPromedioEstudiante(float notas[ESTUDIANTES][ASIGNATURAS]) {
         }
         promedio = suma / ASIGNATURAS;
         printf("Estudiante %d: %.2f\n", i + 1, promedio);
+    }
+}
+
+void calcularPromedioAsignatura(float notas[ESTUDIANTES][ASIGNATURAS]) {
+    int i, j;
+    float suma, promedio;
+
+    for (j = 0; j < ASIGNATURAS; j++) {
+        suma = 0;
+        for (i = 0; i < ESTUDIANTES; i++) {
+            suma += notas[i][j];
+        }
+        promedio = suma / ESTUDIANTES;
+        printf("Asignatura %d: %.2f\n", j + 1, promedio);
     }
 }
